@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authorization | {% block title %} {% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    .navbar-text ul {
+      display: flex;
+      flex-direction: row;
+      list-style-type: none;
+      /* margin-right: 10px; */
+      margin-top: 7px;
+
+
+    }
+
+    .navbar-text ul a {
+      text-decoration: none;
+      color: azure;
+      padding: 0 10px;
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    .navbar-text ul a:hover {
+      background-color: white;
+      color: black;
+
+    }
+
+    .cover {
+      background-position: center;
+      margin-top: -20px;
+      background-size: cover;
+      height:100%;
+      background-blend-mode: hard-light;
+    }
+  </style>
+
+</head>
+
+<body style="width: 100%; height: 100%;">
+
+  <nav class="navbar bg-body-tertiary"
+    style="width: 100%; background-color: rgb(37, 36, 36); color: azure; height: 70px;">
+    <div class="container" style=" width: 100%; margin: 0%; ">
+      <h2 style=" margin-left: -80%; margin-top: 6px; "><a href="{% url 'home' %}"
+          style="text-decoration: none; color: white;">Home</a></h2>
+      {% if request.user.is_authenticated %}
+      <span class="navbar-text " style="margin-right: -80%;">
+        <ul>
+          
+          <li><a href="{% url 'logout-user'%}"> Logout </a></li>
+        </ul>
+      </span>
+      {% else %}
+
+      <span class="navbar-text " style="margin-right: -80%;">
+        <ul>
+          <li><a href="{% url 'signup'%}"> SignUp </a></li>
+          <li><a href="{% url 'login'%}"> LogIn </a></li>
+        </ul>
+      </span>
+      {% endif %}
+  </nav>
+  {% block body %} {% endblock %}
+
+</body>
+
+</html>
