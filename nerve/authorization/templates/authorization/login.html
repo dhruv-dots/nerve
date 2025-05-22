@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}LogIn{% endblock %}
+{% block body %}
+<div class="cover">
+    <div class="container">
+        <div class="row mt-3 pt-3">
+            <div class="col-md-4 offset-md-7">
+                <div class="card shadow my-2">
+                    <div class="card-body">
+                        <h2>LogIn</h2>
+                        <hr>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.username|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.password|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_captcha">Captcha</label>
+                                {{ form.captcha }}
+                                {% if form.captcha.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ form.captcha.errors }}
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            <a href="{% url 'password_reset' %}">Forget Password?</a>
+                            <p>Don't have an account? Go to <a href="{% url 'signup' %}">SignUp</a></p>
+                            <button class="btn btn-primary btn-block" type="submit">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
